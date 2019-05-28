@@ -1,15 +1,22 @@
-Title:  CSGO Lyrics Script Generator
+# CSGO Lyrics Script Generator
 
-Description:  Generates a cfg script based on a lyrics file that allows the player to display the lyrics of any song line by line, using only one key bind.
+Generates a cfg script based on a lyrics file that allows the player to display the lyrics of any song line by line, using only one key bind.
 			 	
-Author:  ThioJoe - www.youtube.com/user/ThioJoe , www.youtube.com/user/CacheGaming
+Original Author:  ThioJoe - www.youtube.com/user/ThioJoe / www.youtube.com/user/CacheGaming
+Updated and improved by me, DeltaNedas.
+Please subscribe to Mr. Joe.
 
+# Instructions
 
-//////////////////////INSTRUCTIONS//////////////////////
+## Simple
+1. Run the program.
+2. Type the lyrics if your song into the terminal.
+3. Hold CTRL + C or CTRL + Z on Windows.
+4. Copy the output into a cfg file.
 
-1. Put lyrics into a file called lyrics.txt, max 250 Lines.
-2. Remove all blank lines and quotation ( " ) marks.  Apostrophes ( ' ) are OK.
-3. Run the program and choose a file name.
-4. Place the new cfg file into the "cfg" folder in your CSGO directory.
-5. Exec NameYouPicked.cfg in csgo console - it will be bound to MOUSE3 (Middle Mouse) by default.
-6. To change the bind key, simply edit the produced .cfg file and change it.
+## Advanced
+1. Run the program with -f, -o or -h arguments.
+	-f or --file means read lyrics from a file.
+	-o or --output means output cfg to a file.
+	-h or --help means print the help. (pretty much this)
+2. Repeat the simple version for any needed arguments that you omit.
