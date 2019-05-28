@@ -10,7 +10,7 @@ Please subscribe to Mr. Joe.
 
 ## Simple
 1. Run the program.
-2. Type the lyrics if your song into the terminal.
+2. Type the lyrics of your song into the terminal.
 3. Hold CTRL + C or CTRL + Z on Windows.
 4. Copy the output into a cfg file.
 
