@@ -1,10 +1,14 @@
 # CSGO Lyrics Script Generator
 
 Generates a cfg script based on a lyrics file that allows the player to display the lyrics of any song line by line, using only one key bind.
-			 	
+
+
 Original Author:  ThioJoe - www.youtube.com/user/ThioJoe / www.youtube.com/user/CacheGaming
+
 Updated and improved by me, DeltaNedas.
+
 Please subscribe to Mr. Joe.
+
 
 # Instructions
 
