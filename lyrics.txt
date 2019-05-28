@@ -1,4 +1,9 @@
-Example line 1
-Example line 2
-Example line 3
-overwrite this file with whatever lyrics you want each time
+Please subscribe to ThioJoe 1.
+
+Please subscribe to ThioJoe 2.
+
+Please subscribe to ThioJoe 3.
+
+Newlines are ignored.
+
+Please subscribe to ThioJoe.
