@@ -1,12 +1,12 @@
 /*
 	Title:						CSGO Lyrics Script Generator
 
-	Description:			Generates a cfg script based on a lyrics file that allows the player to
-										display the lyrics of any song line by line, using only one key bind.
-			 	
+	Description:					Generates a cfg script based lyrics file that allows the player to
+									display the lyrics of any song line by line, using only one key bind.
+
 	Original Author:	ThioJoe: www.youtube.com/user/ThioJoe
 														 www.youtube.com/user/CacheGaming
-							
+
 	Compiling:				use `make'.
 */
 
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 	string inputName;
 	string outputName;
 	ofstream outputFile;
-	
+
 	if (argc > 0) {
 		int skipping = 0;
 		for (int i = 1; i < argc; i++) {
@@ -55,30 +55,29 @@ int main(int argc, char* argv[]) {
 				continue;
 			}
 			string arg = string(argv[i]);
-			printf("arg: %s.\n", (arg.compare("-i") == 0 || arg.compare("--input")) ? "true" : "false");
-			if (arg.compare("-h") == 0 || arg.compare("--help")) {
+			if (arg.compare("-h") == 0 || arg.compare("--help") == 0) {
 				printhelp(argv[0]);
 				return 0;
-			} else if (arg.compare("-i") == 0 || arg.compare("--input")) {
+			} else if (arg.compare("-i") == 0 || arg.compare("--input") == 0) {
 				skipping++;
 				if (argc > i) {
 					inputName = string(argv[i + 1]);
 					continue;
 				}
-			} else if (arg.compare("-o") == 0 || arg.compare("--output")) {
+			} else if (arg.compare("-o") == 0 || arg.compare("--output") == 0) {
 				skipping++;
 				if (argc > i) {
 					outputName = string(argv[i + 1]);
 					continue;
 				}
-			} else if (arg.compare("-k") == 0 || arg.compare("--key")) {
+			} else if (arg.compare("-k") == 0 || arg.compare("--key") == 0) {
 				skipping++;
 				if (argc > i) {
 					key = string(argv[i + 1]);
 					continue;
 				}
 			}
-			printf("Arg: %s.\n", arg)
+			printf("Arg: %s.\n", arg.c_str());
 			printhelp(argv[0]);
 			return 1;
 		}
@@ -86,20 +85,25 @@ int main(int argc, char* argv[]) {
 
 	//Creates name for file in filename variable
 
-	//Loads whatever is in lyrics.txt into array line by line
-	//Simultaneously counts number of lines in lyrics.txt
+	//Loads whatever is in lyrics.txt into set line by line
 	if (inputName.empty()) {
-		char* buffer;
+		char* buffer = nullptr;
 		while (scanning) {
 			scanf("%s", buffer);
 			lines.insert(string(buffer));
 		}
 	} else {
 		ifstream lyrics(inputName.c_str());
-		for(int i = 1; lyrics.good(); i++) {
+		if (lyrics.is_open()) {
 			string line;
-			getline(lyrics, line);
-			lines.insert(line);
+			while (getline(lyrics, line)) {
+				if (!line.empty()) {
+					lines.insert(line);
+				}
+			}
+		} else {
+			printf("Failed to read input file \"%s\": %d.\n", inputName.c_str(), errno);
+			exit(errno);
 		}
 	}
 
@@ -108,25 +112,26 @@ int main(int argc, char* argv[]) {
 	//Creates new text file with given name
 	//If it already exists, this erases it's contents
 	if (outputName.empty()) {
+		printf("No output file specified, printing output.\n");
 		string outputString = "bind " + key + " \"next_line\"\n";
 		outputString += "alias c0 \"alias next_line c1;\"\n";
-		
+
 		// Write the actual lyrics.
-		char* buffer;
 		set<string>::iterator iter = lines.begin();
 		for (int i = 0; i < lines.size(); i++) {
+			char buffer[256];
 			sprintf(buffer, "alias c%d \"say %s; alias next_line c%d;\"\n", i + 1, (*iter).c_str(), i + 2);
 			outputString += string(buffer);
 			advance(iter, 1);
 		}
-		
+
 		// Run it after
 		outputString += "c0;";
 		printf("Output:\n%s\n", outputString.c_str());
 	} else {
-		outputFile.open(outputName);
+		outputFile.open(outputName.c_str());
 		if (!outputFile.is_open()) {
-			printf("Failed to open %s for reading: %d.\n", outputName, errno);
+			printf("Failed to open %s for reading: %d.\n", outputName.c_str(), errno);
 			return errno;
 		}
 		outputFile << "";
@@ -138,10 +143,10 @@ int main(int argc, char* argv[]) {
 		outputFile << "alias c0 \"alias next_line c1;\"\n";
 
 		//Prints each iteration for however many lines were found
-		char* buffer;
+		char* buffer = nullptr;
 		set<string>::iterator iter = lines.begin();
 		for (int i = 0; i < lines.size(); i++) {
-			sprintf(buffer, "alias c%d \"say %s; alias next_line c%d;\"\n", i + 1, *iter, i + 2);
+			sprintf(buffer, "alias c%d \"say %s; alias next_line c%d;\"\n", i + 1, (*iter).c_str(), i + 2);
 			outputFile << buffer;
 			advance(iter, 1);
 		}
