@@ -139,14 +139,15 @@ int main(int argc, char* argv[]) {
 		outputFile.close();
 
 		//Prints initial script info into file
-		outputFile.open (outputName, fstream::out | fstream::app);
+		printf("Saving boostrap section.\n");
+		outputFile.open(outputName.c_str(), fstream::out | fstream::app);
 		outputFile << "bind " + key + " \"next_line\"\n";
 		outputFile << "alias c0 \"alias next_line c1;\"\n";
 
 		//Prints each iteration for however many lines were found
-		char* buffer = nullptr;
 		set<string>::iterator iter = lines.begin();
 		for (int i = 0; i < lines.size(); i++) {
+			char buffer[256];
 			sprintf(buffer, "alias c%d \"say %s; alias next_line c%d;\"\n", i + 1, (*iter).c_str(), i + 2);
 			outputFile << buffer;
 			advance(iter, 1);
