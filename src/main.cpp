@@ -38,7 +38,7 @@ void printhelp(char progName[]) {
 
 int main(int argc, char* argv[]) {
 	printf("\033]0CSGO Lyrics Script Generator\007"); //Sets the title of terminal.
-	signal(SIGTERM, handleSignal);
+	signal(SIGINT, handleSignal);
 
 	//Initialize Variables
 	set<string> lines;
@@ -87,8 +87,9 @@ int main(int argc, char* argv[]) {
 
 	//Loads whatever is in lyrics.txt into set line by line
 	if (inputName.empty()) {
-		char* buffer = nullptr;
+
 		while (scanning) {
+			char buffer[128];
 			scanf("%s", buffer);
 			lines.insert(string(buffer));
 		}
