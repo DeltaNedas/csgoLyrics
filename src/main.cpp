@@ -55,28 +55,30 @@ int main(int argc, char* argv[]) {
 				continue;
 			}
 			string arg = string(argv[i]);
-			if ((arg.compare("-h") == 0) || (arg.compare("--help"))) {
+			printf("arg: %s.\n", (arg.compare("-i") == 0 || arg.compare("--input")) ? "true" : "false");
+			if (arg.compare("-h") == 0 || arg.compare("--help")) {
 				printhelp(argv[0]);
 				return 0;
-			} else if ((arg.compare("-i") == 0) || (arg.compare("--input"))) {
+			} else if (arg.compare("-i") == 0 || arg.compare("--input")) {
 				skipping++;
 				if (argc > i) {
-					inputName = argv[i + 1];
+					inputName = string(argv[i + 1]);
 					continue;
 				}
-			} else if ((arg.compare("-o") == 0) || (arg.compare("--output"))) {
+			} else if (arg.compare("-o") == 0 || arg.compare("--output")) {
 				skipping++;
 				if (argc > i) {
-					outputName = argv[i + 1];
+					outputName = string(argv[i + 1]);
 					continue;
 				}
-			} else if ((arg.compare("-k") == 0) || (arg.compare("--key"))) {
+			} else if (arg.compare("-k") == 0 || arg.compare("--key")) {
 				skipping++;
 				if (argc > i) {
-					key = argv[i + 1];
+					key = string(argv[i + 1]);
 					continue;
 				}
 			}
+			printf("Arg: %s.\n", arg)
 			printhelp(argv[0]);
 			return 1;
 		}
