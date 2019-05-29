@@ -89,8 +89,7 @@ int main(int argc, char* argv[]) {
 	if (inputName.empty()) {
 		char* buffer;
 		while (scanning) {
-			memset(buffer, 0, sizeof buffer);
-			scanf("%s", &buffer);
+			scanf("%s", buffer);
 			lines.insert(string(buffer));
 		}
 	} else {
@@ -114,7 +113,7 @@ int main(int argc, char* argv[]) {
 		char* buffer;
 		set<string>::iterator iter = lines.begin();
 		for (int i = 0; i < lines.size(); i++) {
-			sprintf(&buffer, "alias c%d \"say %s; alias next_line c%d;\"\n", i + 1, (*iter).c_str(), i + 2);
+			sprintf(buffer, "alias c%d \"say %s; alias next_line c%d;\"\n", i + 1, (*iter).c_str(), i + 2);
 			outputString += string(buffer);
 			advance(iter, 1);
 		}
@@ -140,7 +139,7 @@ int main(int argc, char* argv[]) {
 		char* buffer;
 		set<string>::iterator iter = lines.begin();
 		for (int i = 0; i < lines.size(); i++) {
-			sprintf(&buffer, "alias c%d \"say %s; alias next_line c%d;\"\n", i + 1, *iter, i + 2);
+			sprintf(buffer, "alias c%d \"say %s; alias next_line c%d;\"\n", i + 1, *iter, i + 2);
 			outputFile << buffer;
 			advance(iter, 1);
 		}
