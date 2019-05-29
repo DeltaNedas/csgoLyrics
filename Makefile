@@ -6,8 +6,8 @@ CXX = g++
 CXXFLAGS = -O3 -Wall -std=c++17 -I$(SOURCEDIR) -c -g
 LDFLAGS = -L.
 
-EXEC_FILE = hackertime
-OBJ = hackertime.o
+EXEC_FILE = csgolyrics
+OBJ = main.o
 OBJECTS = $(patsubst %, $(BUILDDIR)/%, $(OBJ))
 
 all: $(EXEC_FILE)
@@ -34,4 +34,4 @@ install: $(EXEC_FILE)
 w64: CXX = x86_64-w64-mingw32-g++
 w64: $(OBJECTS)
         mkdir -p $(BUILDDIR)
-        x86_64-w64-mingw32-g++ -static -static-libgcc -static-libstdc++ -o hackertime.exe $^ $(LDFLAGS)
+        x86_64-w64-mingw32-g++ -static -static-libgcc -static-libstdc++ -o $(EXEC_FILE).exe $^ $(LDFLAGS)
