@@ -22,5 +22,6 @@ Please subscribe to Mr. Joe.
 1. Run the program with -f, -o or -h arguments.
 	-f or --file means read lyrics from a file.
 	-o or --output means output cfg to a file.
+	-k or --key means change the lyrics key.
 	-h or --help means print the help. (pretty much this)
 2. Repeat the simple version for any needed arguments that you omit.
